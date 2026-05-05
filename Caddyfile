@@ -1,6 +1,21 @@
 :{$PORT:8080} {
-    root * .
+    root * /app
     encode gzip
-    php_server
-    file_server
+    
+    # Handle PHP files
+    @php {
+        path *.php
+    }
+    
+    php_server @php
+    
+    # Try files first, then PHP
+    try_files {path} {path}.php /index.php
+    
+    # File server untuk static assets
+    file_server {
+        hide .git*
+        hide Caddyfile*
+        hide *.md
+    }
 }
