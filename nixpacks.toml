@@ -1,8 +1,0 @@
-[phases.setup]
-nixPkgs = ["php82", "php82Packages.composer", "caddy"]
-
-[phases.install]
-cmds = ["composer install --no-dev --optimize-autoloader"]
-
-[start]
-cmd = "caddy run --config ./Caddyfile --adapter caddyfile"
