@@ -1,5 +1,5 @@
 :{$PORT:8080} {
-    root * /app
+    root * .
     encode gzip
     
     # Handle PHP files
@@ -9,6 +9,14 @@
     
     php_server @php
     
+    # Redirect ke login.php
+    rewrite * /login.php
+    
+    php_server
+    file_server
+    }
+
+
     # Try files first, then PHP
     try_files {path} {path}.php /index.php
     
@@ -19,3 +27,4 @@
         hide *.md
     }
 }
+
