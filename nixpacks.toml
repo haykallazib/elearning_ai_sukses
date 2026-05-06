@@ -1,7 +1,8 @@
 [phases.setup]
-# Perintah ini menyuruh Railway install PHP dan Composer
-nixPkgs = ["php82", "composer", "curl"]
+nixPkgs = ["php82", "php82Packages.composer", "caddy"]
+
+[phases.install]
+cmds = ["composer install --no-dev --optimize-autoloader"]
 
 [start]
-# Perintah ini menyuruh Railway menjalankan Caddy sebagai server utama
-cmd = "caddy run --config ./Caddyfile"
+cmd = "caddy run --config ./Caddyfile --adapter caddyfile"
